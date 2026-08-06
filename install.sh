@@ -74,26 +74,8 @@ install_bg() {
         return
     fi
 
-    # Define Glassmorphism CSS Block (Includes Login Glass, Input Fixes, & White Line Overflow Fixes)
+    # Define Glassmorphism CSS Block (Includes Login Modal & Bandwidth Chart Fixes)
     export CSS_BLOCK="<style id=\"saturo-zentrix-theme\">
-    /* Global Viewport & White Line Removal Fixes */
-    html, body, #app, div[class*=\"AppContainer\"], div[class*=\"AuthenticationRouter\"] {
-        background-color: #0f172a !important;
-        background-attachment: fixed !important;
-        background-position: center !important;
-        background-repeat: no-repeat !important;
-        background-size: cover !important;
-        min-height: 100vh !important;
-        width: 100% !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        overflow-x: hidden !important;
-    }
-
-    * {
-        box-sizing: border-box !important;
-    }
-
     /* Main Background & Overlay */
     #custom-bg {
         position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
@@ -113,56 +95,45 @@ install_bg() {
         border: 1px solid rgba(255, 255, 255, 0.05);
     }
 
-    /* Glassmorphism Login Modal & Container Styling */
+    /* Login Modal Container Styling — matched to spy.zentrixtech.name.ng */
     .flex-1.flex.items-center.justify-center > div,
-    div[class*=\"LoginFormContainer\"], 
-    div[class*=\"LoginContainer\"],
-    .bg-white {
-        background: rgba(15, 23, 42, 0.45) !important;
-        backdrop-filter: blur(16px) saturate(180%) !important;
-        -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
-        border-radius: 20px !important;
-        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5) !important;
-        border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    div[class*="LoginFormContainer__Container"] {
+        width: 700px !important;
+        max-width: calc(100vw - 2rem) !important;
+        box-sizing: border-box !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        background-color: rgba(0, 0, 0, 0.14) !important;
+        background-image: none !important;
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border-radius: 14px;
+        box-shadow: 0 18px 45px rgba(0, 0, 0, 0.28);
+        border: 1px solid rgba(255, 255, 255, 0.18);
         padding: 2rem;
     }
 
-    /* Glassmorphic Input Text Boxes */
-    input[type=\"text\"], 
-    input[type=\"password\"], 
-    input[type=\"email\"] {
-        background: rgba(0, 0, 0, 0.35) !important;
-        color: #ffffff !important;
-        border: 1px solid rgba(255, 255, 255, 0.2) !important;
-        border-radius: 10px !important;
-        backdrop-filter: blur(5px) !important;
-        -webkit-backdrop-filter: blur(5px) !important;
-        transition: all 0.3s ease !important;
+    /* The reference login form measures 620px inside the 700px card. */
+    form[class*="LoginContainer___StyledLoginFormContainer"],
+    form[class*="LoginFormContainer"] {
+        width: 620px !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
     }
 
-    input[type=\"text\"]:focus, 
-    input[type=\"password\"]:focus, 
-    input[type=\"email\"]:focus {
-        border-color: #3b82f6 !important;
-        box-shadow: 0 0 12px rgba(59, 130, 246, 0.5) !important;
-        outline: none !important;
-    }
+    /* Keep the same proportions on phones without causing horizontal overflow. */
+    @media (max-width: 740px) {
+        .flex-1.flex.items-center.justify-center > div,
+        div[class*="LoginFormContainer__Container"] {
+            width: calc(100vw - 2rem) !important;
+        }
 
-    input::placeholder {
-        color: rgba(255, 255, 255, 0.5) !important;
-    }
-
-    label, p, span, h1, h2, h3 {
-        color: #f3f4f6 !important;
-    }
-
-    /* Login Submit Button */
-    button[type=\"submit\"] {
-        background: linear-gradient(135deg, #2563eb, #1d4ed8) !important;
-        border: 1px solid rgba(255, 255, 255, 0.2) !important;
-        border-radius: 10px !important;
-        font-weight: 600 !important;
-        box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4) !important;
+        form[class*="LoginContainer___StyledLoginFormContainer"],
+        form[class*="LoginFormContainer"] {
+            width: 100% !important;
+        }
     }
 
     /* Bandwidth / Server Resource Charts Background Fix */
@@ -172,9 +143,23 @@ install_bg() {
         padding: 10px;
     }
 
+    /* Keep controls readable over the transparent background. */
+    input, textarea, select {
+        background-color: rgba(0, 0, 0, 0.22) !important;
+        color: rgba(255, 255, 255, 0.95) !important;
+        border: 1px solid rgba(255, 255, 255, 0.16) !important;
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+    }
+
+    button[type="submit"] {
+        background-color: rgba(59, 130, 246, 0.88) !important;
+        border: 1px solid rgba(255, 255, 255, 0.22) !important;
+    }
+
     /* Text Brightness Adjustments */
-    .text-neutral-400, .text-neutral-500 {
-        color: rgba(255, 255, 255, 0.85) !important;
+    .text-neutral-400, .text-neutral-500, label {
+        color: rgba(255, 255, 255, 0.9) !important;
     }
 
     /* Global Body Transparency */
