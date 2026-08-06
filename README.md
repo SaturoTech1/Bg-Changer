@@ -23,5 +23,4 @@ An interactive, lightweight Bash installer for **Pterodactyl Panel**. Easily add
 
 Run this single command in your server terminal as **root**:
 
-```bash
-bash <(curl -s [https://raw.githubusercontent.com/SaturoTech1/Bg-Changer/main/install.sh](https://raw.githubusercontent.com/SaturoTech1/Bg-Changer/main/install.sh))
+```bash <(curl -s https://raw.githubusercontent.com/SaturoTech1/Bg-Changer/main/install.sh)
