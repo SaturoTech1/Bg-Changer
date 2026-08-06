@@ -74,8 +74,26 @@ install_bg() {
         return
     fi
 
-    # Define Glassmorphism CSS Block (Includes Login Modal & Bandwidth Chart Fixes)
+    # Define Glassmorphism CSS Block (Includes Login Glass, Input Fixes, & White Line Overflow Fixes)
     export CSS_BLOCK="<style id=\"saturo-zentrix-theme\">
+    /* Global Viewport & White Line Removal Fixes */
+    html, body, #app, div[class*=\"AppContainer\"], div[class*=\"AuthenticationRouter\"] {
+        background-color: #0f172a !important;
+        background-attachment: fixed !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+        background-size: cover !important;
+        min-height: 100vh !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow-x: hidden !important;
+    }
+
+    * {
+        box-sizing: border-box !important;
+    }
+
     /* Main Background & Overlay */
     #custom-bg {
         position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
@@ -95,15 +113,56 @@ install_bg() {
         border: 1px solid rgba(255, 255, 255, 0.05);
     }
 
-    /* Login Modal Container Styling */
-    .flex-1.flex.items-center.justify-center > div {
-        background-color: rgba(20, 20, 20, 0.85) !important;
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
-        border-radius: 12px;
-        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+    /* Glassmorphism Login Modal & Container Styling */
+    .flex-1.flex.items-center.justify-center > div,
+    div[class*=\"LoginFormContainer\"], 
+    div[class*=\"LoginContainer\"],
+    .bg-white {
+        background: rgba(15, 23, 42, 0.45) !important;
+        backdrop-filter: blur(16px) saturate(180%) !important;
+        -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+        border-radius: 20px !important;
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5) !important;
+        border: 1px solid rgba(255, 255, 255, 0.15) !important;
         padding: 2rem;
+    }
+
+    /* Glassmorphic Input Text Boxes */
+    input[type=\"text\"], 
+    input[type=\"password\"], 
+    input[type=\"email\"] {
+        background: rgba(0, 0, 0, 0.35) !important;
+        color: #ffffff !important;
+        border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        border-radius: 10px !important;
+        backdrop-filter: blur(5px) !important;
+        -webkit-backdrop-filter: blur(5px) !important;
+        transition: all 0.3s ease !important;
+    }
+
+    input[type=\"text\"]:focus, 
+    input[type=\"password\"]:focus, 
+    input[type=\"email\"]:focus {
+        border-color: #3b82f6 !important;
+        box-shadow: 0 0 12px rgba(59, 130, 246, 0.5) !important;
+        outline: none !important;
+    }
+
+    input::placeholder {
+        color: rgba(255, 255, 255, 0.5) !important;
+    }
+
+    label, p, span, h1, h2, h3 {
+        color: #f3f4f6 !important;
+    }
+
+    /* Login Submit Button */
+    button[type=\"submit\"] {
+        background: linear-gradient(135deg, #2563eb, #1d4ed8) !important;
+        border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        border-radius: 10px !important;
+        font-weight: 600 !important;
+        box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4) !important;
     }
 
     /* Bandwidth / Server Resource Charts Background Fix */
