@@ -134,19 +134,43 @@ install_bg() {
         margin-right: auto !important;
     }
 
+    /* Prevent the app shell and login page from becoming wider than the device viewport. */
+    html, body, #app {
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        overflow-x: hidden !important;
+    }
+
     /* Keep the same proportions on phones without causing horizontal overflow. */
     @media (max-width: 740px) {
+        .flex-1.flex.items-center.justify-center,
         .flex-1.flex.items-center.justify-center > div,
+        div[class*="LoginContainer___StyledLoginContainer"],
         div[class*="LoginFormContainer__Container"],
         div[class*="sc-qtrnpk-0"] {
-            width: calc(100vw - 2rem) !important;
-            max-width: none !important;
+            width: 100vw !important;
+            max-width: 100vw !important;
+            min-width: 0 !important;
+            margin-left: 0 !important;
+            margin-right: 0 !important;
             padding: 0 1rem !important;
+            box-sizing: border-box !important;
+        }
+
+        div[class*="LoginFormContainer__Container"] {
+            width: calc(100vw - 2rem) !important;
+            max-width: calc(100vw - 2rem) !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
         }
 
         form[class*="LoginContainer___StyledLoginFormContainer"],
         form[class*="LoginFormContainer"] {
             width: 100% !important;
+            max-width: 100% !important;
+            min-width: 0 !important;
         }
     }
 
