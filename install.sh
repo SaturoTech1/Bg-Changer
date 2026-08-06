@@ -29,6 +29,8 @@ fi
 clean_theme_injections() {
     sed -i '/<style id="saturo-zentrix-theme">/,/<\/style>/d' "$WRAPPER_PATH"
     sed -i '/<style id="custom-bg-style">/,/<\/style>/d' "$WRAPPER_PATH"
+    sed -i '/<style id="xyron-login-width-override">/,/<\/style>/d' "$WRAPPER_PATH"
+    sed -i '/<style id="xyron-login-transparent-override">/,/<\/style>/d' "$WRAPPER_PATH"
     sed -i '/id="custom-bg"/d' "$WRAPPER_PATH"
     sed -i '/class="bg-transparent-overlay"/d' "$WRAPPER_PATH"
     sed -i 's/ bg-transparent//g' "$WRAPPER_PATH"
@@ -113,6 +115,15 @@ install_bg() {
         padding: 2rem;
     }
 
+    /* Match the live panel’s generated login wrapper and form dimensions. */
+    div[class*="sc-qtrnpk-0"] {
+        width: 700px !important;
+        max-width: calc(100vw - 2rem) !important;
+        margin: 0 auto !important;
+        padding: 0 !important;
+        box-sizing: border-box !important;
+    }
+
     /* The reference login form measures 620px inside the 700px card. */
     form[class*="LoginContainer___StyledLoginFormContainer"],
     form[class*="LoginFormContainer"] {
@@ -126,8 +137,11 @@ install_bg() {
     /* Keep the same proportions on phones without causing horizontal overflow. */
     @media (max-width: 740px) {
         .flex-1.flex.items-center.justify-center > div,
-        div[class*="LoginFormContainer__Container"] {
+        div[class*="LoginFormContainer__Container"],
+        div[class*="sc-qtrnpk-0"] {
             width: calc(100vw - 2rem) !important;
+            max-width: none !important;
+            padding: 0 1rem !important;
         }
 
         form[class*="LoginContainer___StyledLoginFormContainer"],
@@ -141,6 +155,16 @@ install_bg() {
         background-color: rgba(0, 0, 0, 0.35);
         border-radius: 8px;
         padding: 10px;
+    }
+
+    /* Live panel inner login glass layer. */
+    div[class*="sc-cyh04c-3"],
+    form div[class*="sc-cyh04c"],
+    form div { 
+        background: rgba(0, 0, 0, 0.35) !important;
+        backdrop-filter: blur(16px) !important;
+        -webkit-backdrop-filter: blur(16px) !important;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
     }
 
     /* Keep controls readable over the transparent background. */
